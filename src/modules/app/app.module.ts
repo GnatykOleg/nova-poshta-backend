@@ -1,4 +1,3 @@
-import { DepartmentsModule } from '../departments/departments.module';
 import { TrackingModule } from '../tracking/tracking.module';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
@@ -23,7 +22,6 @@ import configuration from '../../config/configuration';
     }),
 
     TrackingModule,
-    DepartmentsModule,
   ],
 
   controllers: [AppController],
