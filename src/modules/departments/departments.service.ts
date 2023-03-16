@@ -126,7 +126,7 @@ export class DepartmentsService {
 
     // If page not exist we throw error
     if (data.data.length === 0)
-      throw new NotFoundException(`Неіснуючий номер сторінки: ${page}`);
+      throw new NotFoundException(`Немає даних для цього запиту`);
 
     const { CityDescription, CityRef } = data.data[0];
 
