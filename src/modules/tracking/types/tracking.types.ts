@@ -29,4 +29,4 @@ export type CreateTrackingDataReturnType = Promise<{
   WarehouseSender: string;
   CityRecipient: string;
   CitySender: string;
-} | null>;
+}>;

@@ -1,5 +1,5 @@
 import { HttpService } from '@nestjs/axios';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectModel } from '@nestjs/mongoose';
 import { AxiosResponse } from 'axios';
@@ -66,7 +66,8 @@ export class TrackingService {
     // Description of StatusCode from Nova Poshta API Docs:
     // "2" = "Видалено"
     // "3" = "Номер не знайдено"
-    if (StatusCode === '3' || StatusCode === '2') return null;
+    if (StatusCode === '3' || StatusCode === '2')
+      throw new NotFoundException('ТТН з таким номером не знайдено в базі');
 
     return {
       Status,
@@ -91,12 +92,11 @@ export class TrackingService {
       const createdTracking = await this.createTrackingData(trackingNumber);
 
       // 2b. If the createdTracking method returned data to us, we create it in our database
-      const resultOfCreateTrackingData =
-        createdTracking && (await this.trackingModel.create(createdTracking));
+      const resultOfCreateTrackingData = await this.trackingModel.create(
+        createdTracking,
+      );
 
       // 2с. In any case, we return resultOfCreateTrackingData,
-      // if there is data, we will display it in the response,
-      // if there in null, in the controller has code for processing this value
       return resultOfCreateTrackingData;
     }
 
