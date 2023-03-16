@@ -1,10 +1,12 @@
-import { TrackingModule } from '../tracking/tracking.module';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import configuration from '../../config/configuration';
+
+import { TrackingModule } from '../tracking/tracking.module';
+import { DepartmentsModule } from '../departments/departments.module';
 
 @Module({
   imports: [
@@ -20,7 +22,7 @@ import configuration from '../../config/configuration';
       }),
       inject: [ConfigService],
     }),
-
+    DepartmentsModule,
     TrackingModule,
   ],
 
