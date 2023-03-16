@@ -30,7 +30,7 @@ export class DepartmentsService {
   // Check if the city exists and get information about it
   private async checkCityAndGetCityInfo(
     city: string,
-  ): Promise<IDepartmentsCheckCityResponseData | null> {
+  ): Promise<IDepartmentsCheckCityResponseData> {
     const {
       data: { data },
     }: AxiosResponse<IResponseNP<IDepartmentsCheckCityResponseData>> =
